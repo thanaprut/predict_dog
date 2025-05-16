@@ -89,8 +89,6 @@ with st.container():
                     scale = img_h / 600
 
                     font_size = int(18 * scale)
-                    font = ImageFont.truetype("arial.ttf", font_size)
-
                     border_width = int(3 * scale)
                     padding = int(8 * scale)
 
@@ -98,7 +96,7 @@ with st.container():
                     center_x = img_w // 2
                     center_y = img_h // 2
 
-                    text_bbox = draw.textbbox((0, 0), label, font=font)
+                    text_bbox = draw.textbbox((0, 0), label)
                     text_width = text_bbox[2] - text_bbox[0]
                     text_height = text_bbox[3] - text_bbox[1]
 
@@ -111,7 +109,7 @@ with st.container():
                         text_x + text_width + padding, text_y + text_height + padding],
                         fill="lime"
                     )
-                    draw.text((text_x, text_y), label, font=font, fill="black")
+                    draw.text((text_x, text_y), label,  fill="black")
                 st.image(image_pil, caption="ผลการวิเคราะห์", use_container_width=True)
                 with st.container(border=True):
                     for pred in result:
