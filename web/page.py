@@ -1,3 +1,7 @@
+# page.py
+
+# page_title: ตรวจสอบพันธุ์หมา
+# page_icon: 🐶
 import sys
 import os
 import streamlit as st
@@ -11,6 +15,11 @@ import cv2
 import numpy as np
 import json
 import pandas as pd
+
+st.set_page_config(
+    page_title="Predict Dog Breed",
+    page_icon="🐶"
+)
 
 def convert_uploadedfile_to_cv2(file):
     img = Image.open(file)
@@ -135,8 +144,8 @@ with st.container():
                             st.write(f'--------------------------------')
            
 with st.container(border=True):
-            st.write("สมาชิกกลุ่ม : ธนพฤฒ วิบูลย์ภาณุเวช 1660904556")
-            st.write("สมาชิกกลุ่ม : ธนวินท์ วันหนุน 1660902550")
-            
+    st.write("สมาชิกกลุ่ม : ธนพฤฒ วิบูลย์ภาณุเวช 1660904556")
+    st.write("สมาชิกกลุ่ม : ธนวินท์ วันหนุน 1660902550")
+    
 
 
