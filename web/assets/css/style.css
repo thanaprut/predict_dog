@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;1,800;1,900&display=swap");
+
+* {
+    font-family: Kanit, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.st-emotion-cache-ktz07o {
+    background: var(--navy-80008, rgba(15, 23, 42, 0.80));
+    border: 1px solid var(--blue-300, #85CCE7);
+    transition: all 0.5s;
+}
+
+.st-emotion-cache-ktz07o:hover {
+    color: white;
+    border: 1px solid var(--blue-300, #85CCE7);
+    background: radial-gradient(100% 100% at 100% 0%, rgba(133, 204, 231, 0.20) 0%, rgba(133, 204, 231, 0.00) 100%), radial-gradient(100% 100% at 0% 100%, rgba(133, 204, 231, 0.20) 0%, rgba(133, 204, 231, 0.00) 100%), rgba(35, 44, 64, 0.90);
+}
+
+.st-emotion-cache-ktz07o:active {
+    color: white;
+    border: 1px solid var(--blue-300, #85CCE7);
+    background: radial-gradient(100% 100% at 100% 0%, rgba(133, 204, 231, 0.20) 0%, rgba(133, 204, 231, 0.00) 100%), radial-gradient(100% 100% at 0% 100%, rgba(133, 204, 231, 0.20) 0%, rgba(133, 204, 231, 0.00) 100%), rgba(35, 44, 64, 0.90);
+}
+
+.st-emotion-cache-ktz07o:focus:not(:active) {
+    color: white;
+    border: 1px solid var(--blue-300, #85CCE7);
+    background: radial-gradient(100% 100% at 100% 0%, rgba(133, 204, 231, 0.20) 0%, rgba(133, 204, 231, 0.00) 100%), radial-gradient(100% 100% at 0% 100%, rgba(133, 204, 231, 0.20) 0%, rgba(133, 204, 231, 0.00) 100%), rgba(35, 44, 64, 0.90);
+}
+
+
+.st-emotion-cache-u4v75y.e1lln2w84 {
+    border-radius: 8px;
+    border: 1px solid var(--navy-300, #334155);
+    background: rgba(15, 23, 42, 0.90);
+}
+
+.bg_loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-loader {
+    z-index: 9999;
+    width: 100px;
+    height: 100px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
