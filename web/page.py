@@ -5,26 +5,18 @@
 import sys
 import os
 import streamlit as st
-import supervision as sv
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from predicts.predict_utils import predict_breed
 from inference_sdk import InferenceHTTPClient
-import time
 from PIL import Image, ImageDraw, ImageFont
 import cv2
 import numpy as np
-import json
 import pandas as pd
 
 st.set_page_config(
     page_title="Predict Dog Breed",
-    page_icon="🐶"
+    page_icon="🐶"  
 )
-
-def convert_uploadedfile_to_cv2(file):
-    img = Image.open(file)
-    return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-
 
 CLIENT = InferenceHTTPClient(
     api_url="https://serverless.roboflow.com",
@@ -36,6 +28,9 @@ with open("web/assets/css/style.css") as css:
 base_path = os.path.dirname(__file__)
 csv_path = os.path.join(base_path, "..", "data", "dogs_cleaned.csv")
 
+def convert_uploadedfile_to_cv2(file):
+    img = Image.open(file)
+    return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 spinner_placeholder = None  
 def loading_toogle(boolean):
@@ -67,14 +62,17 @@ def classify_owner(row):
 with st.container():
     file = st.file_uploader("📁 อัปโหลดรูปภาพไฟล์พันธ์หมาที่ต้องการตรวจสอบ", accept_multiple_files=False, type=["jpg", "jpeg", "png"])
     predict_button = st.button("ตรวจสอบพันธ์หมา")
-    if predict_button and file:
+    if predict_button and not file:
+        st.warning('กรุณาอัปโหลดรูปภาพ', icon="⚠️")
+    elif predict_button and file:
         loading_toogle(True)
         image_cv2 = convert_uploadedfile_to_cv2(file)
         file.seek(0)
         df = pd.read_csv(csv_path)
         result = predict_breed(CLIENT, file_obj=image_cv2, num_run=20)
+        loading_toogle(False)
+        print(result)
         if result:
-            loading_toogle(False)
             with st.container():
                 boxes = []
                 for pred in result:
@@ -139,9 +137,12 @@ with st.container():
                                 st.write(f'เป็นมิตรกับหมา: {df_breed["Dog Friendly"]}')
                                 st.write(f'ความฉลาด: {df_breed["Intelligence"]}')
                                 st.write(f'อายุเฉลี่ย: {df_breed["Life Span"]}')
+                                st.write(f'เหมาะสมกับ : {df_breed["Suitable_For"]}')
                             else:
-                                st.write(f"ไม่พบข้อมูลพันธุ์สุนัขชื่อ '{name_breed}' ในชุดข้อมูล")
+                                st.warning(f"ไม่พบข้อมูลพันธุ์สุนัขชื่อ '{name_breed}' ในชุดข้อมูล", icon="⚠️")
                             st.write(f'--------------------------------')
+        else:
+            st.warning('ตรวจไม่พบสุนัขในรูปภาพ', icon="⚠️")
            
 with st.container(border=True):
     st.write("สมาชิกกลุ่ม : ธนพฤฒ วิบูลย์ภาณุเวช 1660904556")
