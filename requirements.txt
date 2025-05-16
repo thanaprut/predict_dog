@@ -1,1 +1,6 @@
+streamlit
 supervision
+inference-sdk
+opencv-python
+pillow
+pandas
